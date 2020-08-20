@@ -61,7 +61,7 @@ export default async (req, res) => {
 			// Check if customCode was provided
 			if (customCode) {
 				const urlCustomCoded = await Url.findOne({
-					urlCode: customCode,
+					urlCode: customCode.toLowerCase(),
 				});
 
 				// Check if customCode was already taken, if yes abort
@@ -71,7 +71,7 @@ export default async (req, res) => {
 						message: "Custom code not available",
 					});
 				}
-				urlCode = customCode;
+				urlCode = customCode.toLowerCase();
 			} else {
 				urlCode = shortId.generate();
 			}
@@ -147,21 +147,21 @@ export default async (req, res) => {
 				});
 			}
 
-			const urlToDelete = await Url.findOne({
+			const urlToUpdate = await Url.findOne({
 				urlCode: urlCodeToUpdate,
 			});
 
 			const urlCustomCoded = await Url.findOne({
-				urlCode: newUrlCode,
+				urlCode: newUrlCode.toLowerCase(),
 			});
 
-			if (!urlToDelete) {
+			if (!urlToUpdate) {
 				return res.status(404).json({
 					code: "URL_NOT_FOUND",
 					message: "URL with specified urlCode was not found.",
 				});
 			}
-			if (urlToDelete.user != userEmail) {
+			if (urlToUpdate.user !== userEmail) {
 				return res.status(401).json({
 					code: "UNAUTHORIZED",
 					message: "You are not authorized to access that.",
@@ -177,7 +177,10 @@ export default async (req, res) => {
 			try {
 				const updatedUrl = await Url.findOneAndUpdate(
 					{ urlCode: urlCodeToUpdate, user: userEmail },
-					{ urlCode: newUrlCode, shortUrl: baseUrl + newUrlCode },
+					{
+						urlCode: newUrlCode.toLowerCase(),
+						shortUrl: baseUrl + newUrlCode.toLowerCase(),
+					},
 					{ new: true }
 				).select(["-__v", "-_id"]);
 				return res.json(updatedUrl);
