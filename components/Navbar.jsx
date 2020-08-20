@@ -25,11 +25,11 @@ const Navbar = ({ toggleTheme }) => {
 		<div>
 			<div className="navbar">
 				<div className="title">
-					<p className="titleText">
+					<h3 className="titleText">
 						<Link href="/">
 							<a>Shortr</a>
 						</Link>
-					</p>
+					</h3>
 				</div>
 				{session && (
 					<div className="user">
@@ -100,7 +100,11 @@ const Navbar = ({ toggleTheme }) => {
 					}
 					.title {
 						padding: 10px 50px;
+
 						flex-grow: 1;
+					}
+					.titleText {
+						font-size: 30px;
 					}
 					@media screen and (max-width: 600px) {
 						.title {

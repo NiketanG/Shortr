@@ -132,13 +132,13 @@ const UrlStats = ({ urlCode, changeTheme }) => {
 					.content {
 						margin-top: 100px;
 						display: flex;
-
-						overflow-y: none;
 						max-height: calc(100vh - 100px);
 					}
 
 					.linkSummary {
 						width: 100vw;
+						height: 100%;
+						margin-bottom: 100px;
 						overflow-y: auto;
 					}
 

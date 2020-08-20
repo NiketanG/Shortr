@@ -99,7 +99,12 @@ export default async (req, res) => {
 
 			const pageResponse = await fetch(longUrl);
 			const body = await pageResponse.text();
-			title = body.split("<title>")[1].split("</title>")[0];
+			if (body) {
+				let temp = body.split("<title>")[1];
+				if (temp) {
+					title = temp.split("</title>")[0];
+				}
+			}
 
 			// Create a new URL
 			const url = new Url({

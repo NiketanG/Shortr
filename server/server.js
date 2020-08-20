@@ -32,9 +32,7 @@ nextApp
 				const url = await Urls.findOne({ urlCode: pathname.substr(1) });
 
 				if (url) {
-					res.writeHead(301, {
-						Location: url.longUrl,
-					}).end();
+					res.redirect(url.longUrl);
 
 					let country;
 					try {
