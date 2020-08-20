@@ -22,7 +22,7 @@ It Features:
 
 ## Get Started here
 
-[http://localhost:3000](http://localhost:3000)
+[Demo](https://shor-tr.glitch.me/)
 
 ## Stack
 
