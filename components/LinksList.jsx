@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
-import { Text, Button, Input, Divider, useMediaQuery } from "@zeit-ui/react";
+import { Text, Button, Input, Divider, useTheme } from "@zeit-ui/react";
 import { Plus, Search } from "@zeit-ui/react-icons";
 import ContentLoader from "react-content-loader";
 import PropTypes from "prop-types";
 import LinkItem from "./LinkItem";
 import CreateUrlModal from "./CreateUrlModal";
-import useWindowSize from "../utils/useWindowSize";
 
 const LinksLoader = ({ uniqueKey }) => (
 	<div>
@@ -29,6 +28,7 @@ LinksLoader.propTypes = {
 };
 
 const Links = ({ selectLink, links, addNewUrl }) => {
+	const { palette } = useTheme();
 	const [searchTerm, setSearchTerm] = useState("");
 
 	const [searchResults, setSearchResults] = useState([]);
@@ -60,7 +60,7 @@ const Links = ({ selectLink, links, addNewUrl }) => {
 
 	return (
 		<div className="container">
-			<div style={{ padding: "10px 20px", width: "100%" }}>
+			<div className="header">
 				<Button
 					style={{
 						flexShrink: 0,
@@ -147,11 +147,15 @@ const Links = ({ selectLink, links, addNewUrl }) => {
 						width: 100vw;
 						align-items: center;
 					}
+					.header {
+						padding: 10px 0px;
+						width: calc(100% - 20px);
+					}
 
 					@media screen and (min-width: 652px) {
 						.container {
 							width: 300px;
-							border-right: 1px solid rgba(0, 0, 0, 0.2);
+							border-right: 1px solid ${palette.accents_2};
 						}
 					}
 					.links {

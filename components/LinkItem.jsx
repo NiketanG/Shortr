@@ -31,13 +31,16 @@ const LinkItem = ({ date, title, shortUrl, visits, urlCode, selectLink }) => {
 									</Text>
 								</div>
 							</div>
-
-							<Text style={{ margin: 0 }} size={20}>
-								{title}
-							</Text>
-							<Text size={14} type="success" small>
-								{shortUrl}
-							</Text>
+							<div className="urlTitle">
+								<Text style={{ margin: 0 }} size={20}>
+									{title}
+								</Text>
+							</div>
+							<div className="shortUrl">
+								<Text size={14} type="success" small>
+									{shortUrl}
+								</Text>
+							</div>
 						</div>
 					</a>
 				</Link>
@@ -50,6 +53,18 @@ const LinkItem = ({ date, title, shortUrl, visits, urlCode, selectLink }) => {
 						.link:hover {
 							background-color: ${palette.accents_1};
 							box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+						}
+						.urlTitle {
+							width: 100%;
+							white-space: nowrap;
+							overflow: hidden;
+							text-overflow: ellipsis;
+						}
+						.shortUrl {
+							width: 100%;
+							white-space: nowrap;
+							overflow: hidden;
+							text-overflow: ellipsis;
 						}
 					`}
 				</style>
@@ -76,13 +91,16 @@ const LinkItem = ({ date, title, shortUrl, visits, urlCode, selectLink }) => {
 						</Text>
 					</div>
 				</div>
-
-				<Text style={{ margin: 0 }} size={20}>
-					{title}
-				</Text>
-				<Text size={14} type="success" small>
-					<a href={shortUrl}>{shortUrl}</a>
-				</Text>
+				<div className="urlTitle">
+					<Text style={{ margin: 0 }} size={20}>
+						{title}
+					</Text>
+				</div>
+				<div className="shortUrl">
+					<Text size={14} type="success" small>
+						<a href={shortUrl}>{shortUrl}</a>
+					</Text>
+				</div>
 			</div>
 			<style jsx>
 				{`
@@ -93,6 +111,18 @@ const LinkItem = ({ date, title, shortUrl, visits, urlCode, selectLink }) => {
 					.link:hover {
 						background-color: ${palette.accents_1};
 						box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+					}
+					.urlTitle {
+						width: 100%;
+						white-space: nowrap;
+						overflow: hidden;
+						text-overflow: ellipsis;
+					}
+					.shortUrl {
+						width: 100%;
+						white-space: nowrap;
+						overflow: hidden;
+						text-overflow: ellipsis;
 					}
 				`}
 			</style>

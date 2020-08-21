@@ -19,7 +19,8 @@ nextApp
 			const { pathname } = parsedUrl;
 
 			const referer = req.headers.referer || "None";
-			const ip = req.connection.remoteAddress || req.socket.remoteAddress;
+			const ip = req.headers["x-forwarded-for"]?.split(",")[0];
+			// req.connection.remoteAddress || req.socket.remoteAddress;
 
 			if (
 				pathname === "/" ||
