@@ -1,12 +1,12 @@
 {
 	"name": "shortr",
-	"version": "1.0",
+	"version": "0.1.0",
 	"private": true,
 	"scripts": {
 		"dev": "nodemon -w server/server.js server/server.js",
 		"build": "next build",
 		"start": "next start -p $PORT",
-		"prod": "NODE_ENV=production node server/server.js"
+		"prod": "NODE_ENV=production node server/server.js -p $PORT"
 	},
 	"dependencies": {
 		"@types/mongoose": "^5.7.31",
