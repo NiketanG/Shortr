@@ -48,8 +48,7 @@ const Dashboard = ({ changeTheme }) => {
 	return (
 		<div className="container">
 			<Head>
-				<title>Shortr</title>
-				<link rel="icon" href="/favicon.ico" />
+				<title>Shortr - Dashboard</title>
 			</Head>
 
 			<main className="main">

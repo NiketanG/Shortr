@@ -1,4 +1,3 @@
-import Head from "next/head";
 import Link from "next/link";
 import { useTheme, useToasts, Button, Text, Card, Divider, Input } from "@zeit-ui/react";
 import React, { useState, useEffect } from "react";
@@ -66,25 +65,6 @@ const Home = () => {
 
 	return (
 		<div className="container">
-			<Head>
-				<title>Shortr</title>
-				<link rel="icon" href="/favicon.ico" />
-
-				<meta charSet="utf-8" />
-				<meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-				<meta
-					name="viewport"
-					content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
-				/>
-				<meta name="description" content="Description" />
-				<meta name="keywords" content="Keywords" />
-
-				<link rel="manifest" href="/manifest.json" />
-				<link href="/favicon.jpg" rel="icon" type="image/png" />
-				<link rel="apple-touch-icon" href="/apple-icon.png"></link>
-				<meta name="theme-color" content="#317EFB" />
-			</Head>
-
 			<main>
 				<h1 className="title">Shortr</h1>
 
@@ -198,6 +178,15 @@ const Home = () => {
 				<a href="https://niketang.github.io" target="_blank" rel="noopener noreferrer">
 					Developed by Niketan Gulekar
 				</a>
+				<a
+					href="https://github.com/NiketanG/shortr"
+					target="_blank"
+					rel="noopener noreferrer"
+				>
+					<Text style={{ margin: 0 }} type="secondary">
+						Source Code
+					</Text>
+				</a>
 			</footer>
 
 			<style jsx>{`
@@ -274,6 +263,7 @@ const Home = () => {
 					height: 100px;
 					border-top: 1px solid ${palette.accents_2};
 					display: flex;
+					flex-direction: column;
 					justify-content: center;
 					align-items: center;
 				}

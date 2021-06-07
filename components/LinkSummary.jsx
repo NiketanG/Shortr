@@ -278,7 +278,9 @@ const LinkSummary = ({ selectedLink, deleteLink, updateLink }) => {
 					<>
 						<Head>
 							<title>
-								{selectedLink.title ? `Shortr - ${selectedLink.title}` : "Shortr"}
+								{selectedLink.title
+									? `Shortr - ${selectedLink.title}`
+									: "Shortr - URL Shortening done right"}
 							</title>
 						</Head>
 						<Text small type="secondary">
