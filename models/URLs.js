@@ -5,7 +5,7 @@ const UrlSchema = new mongoose.Schema(
 		longUrl: {
 			type: String,
 			required: [true, "URL is required"],
-			unique: true,
+			unique: false,
 		},
 		urlCode: {
 			type: String,

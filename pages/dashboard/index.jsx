@@ -18,14 +18,10 @@ const Dashboard = ({ changeTheme }) => {
 	const { data: urls } = useSWR("/api/url", getData);
 
 	useEffect(() => {
-		if (urls) {
-			setLinks(urls);
-		}
+		if (urls) setLinks(urls);
 	}, [urls]);
 
-	const selectLink = (urlCode) => {
-		setSelectedLink(urls.find((url) => url.urlCode === urlCode));
-	};
+	const selectLink = (urlCode) => setSelectedLink(urls.find((url) => url.urlCode === urlCode));
 
 	const deleteLink = (deletedLinkCode) => {
 		setSelectedLink(null);

@@ -3,7 +3,7 @@ import { setOptions, getSession } from "next-auth/client";
 
 import fetch from "isomorphic-unfetch";
 // Utilities
-import shortId from "shortid";
+import { nanoid } from "nanoid";
 import validUrl from "valid-url";
 
 setOptions({ site: process.env.SITE });
@@ -61,7 +61,7 @@ export default async (req, res) => {
 			// Check if customCode was provided
 			if (customCode) {
 				const urlCustomCoded = await Url.findOne({
-					urlCode: customCode.toLowerCase(),
+					urlCode: customCode,
 				});
 
 				// Check if customCode was already taken, if yes abort
@@ -71,9 +71,9 @@ export default async (req, res) => {
 						message: "Custom code not available",
 					});
 				}
-				urlCode = customCode.toLowerCase();
+				urlCode = customCode;
 			} else {
-				urlCode = shortId.generate();
+				urlCode = nanoid(10);
 			}
 
 			try {
@@ -152,7 +152,7 @@ export default async (req, res) => {
 			});
 
 			const urlCustomCoded = await Url.findOne({
-				urlCode: newUrlCode.toLowerCase(),
+				urlCode: newUrlCode,
 			});
 
 			if (!urlToUpdate) {
@@ -178,8 +178,8 @@ export default async (req, res) => {
 				const updatedUrl = await Url.findOneAndUpdate(
 					{ urlCode: urlCodeToUpdate, user: userEmail },
 					{
-						urlCode: newUrlCode.toLowerCase(),
-						shortUrl: baseUrl + newUrlCode.toLowerCase(),
+						urlCode: newUrlCode,
+						shortUrl: baseUrl + newUrlCode,
 					},
 					{ new: true }
 				).select(["-__v", "-_id"]);

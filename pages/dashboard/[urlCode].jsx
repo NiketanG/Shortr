@@ -4,8 +4,10 @@ import PropTypes from "prop-types";
 import useSWR from "swr";
 import LinkSummary from "../../components/LinkSummary";
 import Navbar from "../../components/Navbar";
-import { Text } from "@zeit-ui/react";
-import { DocumentProvider } from "mongoose";
+import { Button, Text } from "@zeit-ui/react";
+import { useSession } from "next-auth/client";
+import { useRouter } from "next/router";
+import { ArrowLeft } from "@zeit-ui/react-icons";
 
 const UrlStats = ({ urlCode, changeTheme }) => {
 	const [selectedLink, setSelectedLink] = useState(null);
@@ -47,9 +49,11 @@ const UrlStats = ({ urlCode, changeTheme }) => {
 		setSelectedLink(updatedUrl);
 	};
 
-	const deleteLink = () => {
-		setSelectedLink(null);
-	};
+	const deleteLink = () => setSelectedLink(null);
+
+	const [session] = useSession();
+	const router = useRouter();
+	const backToDashboard = () => router.push("/dashboard");
 
 	if (!urlExists) {
 		return (
@@ -118,6 +122,13 @@ const UrlStats = ({ urlCode, changeTheme }) => {
 
 					<div className="content">
 						<div className="linkSummary">
+							<div className="backToDashboard">
+								{session && (
+									<Button icon={<ArrowLeft />} onClick={backToDashboard}>
+										Back to Dashboard
+									</Button>
+								)}
+							</div>
 							<LinkSummary
 								deleteLink={deleteLink}
 								selectedLink={selectedLink}
@@ -142,6 +153,10 @@ const UrlStats = ({ urlCode, changeTheme }) => {
 						overflow-y: auto;
 					}
 
+					.backToDashboard {
+						margin: 0px 25px 15px 25px;
+					}
+
 					@media screen and (min-width: 600px) {
 						.content {
 							justify-content: center;
@@ -157,6 +172,7 @@ const UrlStats = ({ urlCode, changeTheme }) => {
 						}
 						.linkSummary {
 							width: 60%;
+							background-color: red;
 						}
 					}
 				`}

@@ -13,8 +13,13 @@ import {
 import { Copy, Edit2, Delete, ArrowRight } from "@zeit-ui/react-icons";
 import ContentLoader from "react-content-loader";
 import { Line, Doughnut } from "react-chartjs-2";
+import { useRouter } from "next/router";
+import { useSession } from "next-auth/client";
+import Head from "next/head";
 
 const LinkSummary = ({ selectedLink, deleteLink, updateLink }) => {
+	const router = useRouter();
+
 	const { palette } = useTheme();
 
 	const [customUrl, setCustomUrl] = useState("");
@@ -24,7 +29,7 @@ const LinkSummary = ({ selectedLink, deleteLink, updateLink }) => {
 	const [editEnabled, setEditEnabled] = useState(false);
 	const [isLoading_CustomUrl, setIsLoading_CustomUrl] = useState(false);
 	const [customUrlAvailable, setCustomUrlAvailable] = useState(true);
-
+	const [session] = useSession();
 	const { copy } = useClipboard();
 	const [, setToast] = useToasts();
 
@@ -59,7 +64,9 @@ const LinkSummary = ({ selectedLink, deleteLink, updateLink }) => {
 			setToast({ text: "Custom Url can't be empty." });
 			return;
 		}
+
 		try {
+			setIsLoading_CustomUrl(true);
 			const res = await fetch("/api/url", {
 				credentials: "include",
 				method: "PUT",
@@ -80,10 +87,13 @@ const LinkSummary = ({ selectedLink, deleteLink, updateLink }) => {
 				updateLink(selectedLink.urlCode, customUrl);
 				setCustomUrlAvailable(true);
 				setToast({ text: "Updated link Url" });
+				setEditEnabled(false);
+				router.push(`/dashboard/${customUrl}`, undefined, { shallow: true });
 			}
 			setIsLoading_CustomUrl(true);
 		} catch (error) {
 			setToast({ text: "Some Error Occured" });
+			setIsLoading_CustomUrl(false);
 		}
 	};
 
@@ -100,6 +110,11 @@ const LinkSummary = ({ selectedLink, deleteLink, updateLink }) => {
 				setDeleteModal(false);
 				setToast({ text: "Deleted" });
 				deleteLink(selectedLink.urlCode);
+				if (session) {
+					router.replace("/dashboard");
+				} else {
+					router.replace("/");
+				}
 			})
 			.catch((err) => {
 				console.log(err);
@@ -248,7 +263,7 @@ const LinkSummary = ({ selectedLink, deleteLink, updateLink }) => {
 	return (
 		<div>
 			<div className="linkSummary">
-				{!selectedLink && (
+				{!selectedLink ? (
 					<ContentLoader
 						uniqueKey="nikketan"
 						width={228}
@@ -259,23 +274,25 @@ const LinkSummary = ({ selectedLink, deleteLink, updateLink }) => {
 						<rect x="0" y="20" rx="8" ry="8" width="144" height="16" />
 						<rect x="0" y="46" rx="5" ry="5" width="164" height="10" />
 					</ContentLoader>
-				)}
-				{selectedLink && (
-					<Text small type="secondary">
-						Created on {new Date(selectedLink.dateCreated).toString().substr(0, 24)}
-					</Text>
-				)}
+				) : (
+					<>
+						<Head>
+							<title>
+								{selectedLink.title ? `Shortr - ${selectedLink.title}` : "Shortr"}
+							</title>
+						</Head>
+						<Text small type="secondary">
+							Created on {new Date(selectedLink.dateCreated).toString().substr(0, 24)}
+						</Text>
 
-				{selectedLink && (
-					<Text style={{ margin: 0 }} h3>
-						{selectedLink.title || selectedLink.longUrl}
-					</Text>
-				)}
+						<Text style={{ margin: 0 }} h3>
+							{selectedLink.title || selectedLink.longUrl}
+						</Text>
 
-				{selectedLink && (
-					<Text small type="secondary">
-						<a href={selectedLink.longUrl}>{selectedLink.longUrl}</a>
-					</Text>
+						<Text small type="secondary">
+							<a href={selectedLink.longUrl}>{selectedLink.longUrl}</a>
+						</Text>
+					</>
 				)}
 
 				<div className="link">
@@ -359,6 +376,7 @@ const LinkSummary = ({ selectedLink, deleteLink, updateLink }) => {
 							style={{ margin: "0 10px" }}
 							size="small"
 							className="editButton"
+							loading={isLoading_CustomUrl}
 							iconRight={<ArrowRight />}
 							onClick={updateCustomUrl}
 						>

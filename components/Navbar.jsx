@@ -1,5 +1,5 @@
 import React from "react";
-import { useTheme, Text, User, Tooltip, Button, Popover, Toggle } from "@zeit-ui/react";
+import { useTheme, User, Tooltip, Button, Popover, Toggle } from "@zeit-ui/react";
 import { useSession, signout } from "next-auth/client";
 import Link from "next/link";
 import ContentLoader from "react-content-loader";

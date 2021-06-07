@@ -14,7 +14,8 @@ export default async (req, res) => {
 		} else {
 			userEmail = null;
 		}
-		const url = await Url.findOne({ urlCode: urlCode.toLowerCase() });
+
+		const url = await Url.findOne({ urlCode: urlCode });
 
 		if (!url) {
 			return res.status(404).json({

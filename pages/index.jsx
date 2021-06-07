@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
-import { useTheme, useToasts, Button, Text, Card, Divider, Grid, Input } from "@zeit-ui/react";
+import { useTheme, useToasts, Button, Text, Card, Divider, Input } from "@zeit-ui/react";
 import React, { useState, useEffect } from "react";
 import { ArrowRight, Link2 } from "@zeit-ui/react-icons";
 import fetch from "unfetch";
@@ -24,6 +24,7 @@ const Home = () => {
 		if (session) {
 			setToast({ text: "Logged In" });
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [session]);
 
 	const shorten = () => {
@@ -45,7 +46,6 @@ const Home = () => {
 				if (response.ok) {
 					response.json().then((data) => {
 						setLinkId(data.urlCode);
-						// data.shortUrl
 						setShortened(true);
 						setToast({ text: "Shortened" });
 					});
@@ -56,6 +56,7 @@ const Home = () => {
 
 			.catch((err) => {
 				console.log(err);
+				setShortened(false);
 				setToast({ text: "Some error occured" });
 			})
 			.finally(() => {
@@ -107,7 +108,7 @@ const Home = () => {
 								})
 							}
 						>
-							Login using Google
+							Login with Google
 						</Button>
 					)}
 				</div>
