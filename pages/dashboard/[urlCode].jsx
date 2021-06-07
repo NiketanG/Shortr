@@ -172,7 +172,6 @@ const UrlStats = ({ urlCode, changeTheme }) => {
 						}
 						.linkSummary {
 							width: 60%;
-							background-color: red;
 						}
 					}
 				`}
