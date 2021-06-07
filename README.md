@@ -22,7 +22,7 @@ It Features:
 
 ## Get Started here
 
-[Demo](https://shor-tr.glitch.me/)
+[Demo](https://sh-rtr.herokuapp.com/)
 
 ## Stack
 
