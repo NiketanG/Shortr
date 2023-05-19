@@ -22,19 +22,22 @@ It Features:
 
 ## Get Started here
 
-[Demo](https://sh-rtr.herokuapp.com/)
+[Demo]([https://sh-rtr.herokuapp.com/](https://shortrr.vercel.app/))
 
 ## Stack
 
 -   [Next.js](https://github.com/vercel/next.js)
 -   MongoDB
--   Custom Node Server for Next.js
--   [zeit-ui/react](https://github.com/zeit-ui/react)
--   Geo-Location based on IP Address : [iplocate.io](https://www.iplocate.io/)
+-   Custom Middleware for Redirects in  Next.js
+-   [geist-ui/react]([https://github.com/geist-ui/react](https://github.com/geist-org/geist-ui))
+-   Geo-Location based on IP Address using [iplocate.io](https://www.iplocate.io/)
+-   [swr](https://github.com/vercel/swr)
+-   Zustand
+-   Typescript
 
 ## API
 
-We also provide a REST API for Url Shortening
+REST API for Url Shortening
 
 #### Create a new Url :
 
@@ -54,21 +57,20 @@ We also provide a REST API for Url Shortening
 
 #### Get information about a Custom Url :
 
-    Endpoint: /api/url/<shortUrlCode>
+    Endpoint: /api/url/<shortUrlId>
     Method: GET
 
 #### Update a Custom Url :
 
-    Endpoint: /api/url/<shortUrlCode>
+    Endpoint: /api/url/<shortUrlId>
     Method: PUT
     Data: {
-            urlCodeToUpdate: "Url Code to update",
             newUrlCode: "New Custom Shortr Code"
           }
 
 #### Delete a Custom Url :
 
-    Endpoint: /api/url/<shortUrlCode>
+    Endpoint: /api/url/<shortUrlId>
     Method: DELETE
 
 ## Development
